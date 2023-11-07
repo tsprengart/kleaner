@@ -1,19 +1,9 @@
-use std::path::PathBuf;
+use std::cmp::Ordering;
+use jwalk::WalkDirGeneric;
 
-use clap::{Parser, Subcommand};
-
-#[derive(Parser)]
-#[command(author, version, about, long_about=None)]
-struct Cli {
-    name: Option<String>,
-
-    #[arg(short, long, value_name = "FILE")]
-    config: Option<PathBuf>,
-
-    #[arg(short, long, action = clap::ArgAction::Count)]
-    debug: u8,
-
-    #[command(subcommand)]
-    command: Option<Commands>,
+fn check(path: String) {
+    let walk_dir = WalkDirGeneric::<((usize), (bool))>::new(path); 
 }
-fn main() {}
+fn main() {
+    check("/home/tsprengart/jobs".to_string());
+}
